@@ -36,7 +36,7 @@
 
 	# Download base project
 	estarn "Downloading project"
-	curl --progress-bar -0 https://github.com/djng/djng/archive/master.tar.gz | tar -zx
+	curl -0 https://codeload.github.com/djng/djng/tar.gz/master | tar -zx --strip-components=1
 
 	# Check prerequsites
 	estarn "Checking prerequisites"
