@@ -1,4 +1,4 @@
 djng-init
 =========
 
-Bash script to setup a djng project
+Script to setup a [djng project](https://github.com/djng/djng).
