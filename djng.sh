@@ -47,7 +47,7 @@
 
 	if [ ! -f server/.env ]; then
 		# Read user information
-		estarn "I need some basic information"
+		estarn "I need some basic information. You can change it in the server/.env file."
 		read -e -p "Your name: " USER_NAME </dev/tty
 		read -e -p "Your email: " USER_EMAIL </dev/tty
 		read -e -p "Database user: " DB_USER </dev/tty
@@ -76,7 +76,8 @@
 	fi
 
 	source venv/bin/activate
-	#pip install -r requirements.txt
+	pip install -r requirements.txt
+	pip install -r requirements_dev.txt
 
 	# Init db
 	estarn "Initializing database"
