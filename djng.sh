@@ -54,7 +54,8 @@
 		read -e -s -p "Database password (typing will be hidden): " DB_PASSWORD </dev/tty
 		printf "\n"
 		read -e -p "Database name: " DB_NAME </dev/tty
-		read -e -p "Database host: " -i "localhost" DB_HOST </dev/tty
+		read -e -p "Database host (localhost): " DB_HOST  </dev/tty
+		DB_HOST=${DB_HOST:-localhost}
 
 		# Create .env file
 		cat <<- EOF > server/.env
