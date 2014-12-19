@@ -103,6 +103,9 @@
 	heroku login </dev/tty
 	URL=$(heroku create | egrep -o 'https?://[^ ]+')
 
+	estarn "Adding BUILDPACK_URL"
+	heroku config:add BUILDPACK_URL=https://github.com/heroku/heroku-buildpack-multi.git
+
 	# Add heroku addons
 	estarn "Adding heroku addons"
 	heroku addons:add heroku-postgresql
