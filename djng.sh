@@ -81,11 +81,9 @@
 	pip install -r requirements_dev.txt
 
 	# Init db
-	estarn "Initializing database"
+	estarn "Initializing database and superuser"
 	pushd server > /dev/null
-	python manage.py migrate
-	estarn "Creating Django admin user"
-	python manage.py createsuperuser </dev/tty
+	python manage.py syncdb </dev/tty
 	popd > /dev/null
 
 	estarn "Installing client dependencies"
