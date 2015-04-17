@@ -107,11 +107,14 @@
 	# Add heroku addons
 	estarn "Adding heroku addons"
 	heroku addons:add heroku-postgresql
-	heroku addons:add pgbackups:auto-week
 	heroku addons:add sendgrid
 	heroku addons:add papertrail
 	heroku addons:add newrelic:stark
 	heroku plugins:install git://github.com/ddollar/heroku-config.git
+
+	# Setup database backup
+	estarn "Setup daily database backup"
+	heroku pg:backups schedule DATABASE_URL
 
 	# Setup heroku server env
 	estarn "Configuring heroku environment"
