@@ -126,10 +126,8 @@
 	git push heroku master
 
 	# Initalize heroku database
-	estarn "Initializing heroku database"
-	heroku run python server/manage.py migrate
-	estarn "Creating Django admin user on heroku"
-	heroku run python server/manage.py createsuperuser </dev/tty
+	estarn "Initializing heroku database and superuser"
+	heroku run python server/manage.py syncdb </dev/tty
 
 	printf "\n\xE2\x98\x85 Done!\nVisit your app at %s\n" ${URL}
 }
