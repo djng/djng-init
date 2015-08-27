@@ -83,7 +83,8 @@
 	# Init db
 	estarn "Initializing database and superuser"
 	pushd server > /dev/null
-	python manage.py syncdb </dev/tty
+	python manage.py migrate
+	python manage.py createsuperuser </dev/tty
 	popd > /dev/null
 
 	estarn "Installing client dependencies"
@@ -128,7 +129,8 @@
 
 	# Initalize heroku database
 	estarn "Initializing heroku database and superuser"
-	heroku run python server/manage.py syncdb </dev/tty
+	heroku run python server/manage.py migrate
+	heroku run python server/manage.py createsuperuser </dev/tty
 
 	printf "\n\xE2\x98\x85 Done!\nVisit your app at %s\n" ${URL}
 }
