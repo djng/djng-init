@@ -81,9 +81,10 @@
 	pip install -r requirements_dev.txt
 
 	# Init db
-	estarn "Initializing database and superuser"
+	estarn "Initializing database"
 	pushd server > /dev/null
 	python manage.py migrate
+	estarn "Creating superuser"
 	python manage.py createsuperuser </dev/tty
 	popd > /dev/null
 
@@ -107,15 +108,15 @@
 
 	# Add heroku addons
 	estarn "Adding heroku addons"
-	heroku addons:add heroku-postgresql
-	heroku addons:add sendgrid
-	heroku addons:add papertrail
-	heroku addons:add newrelic:stark
+	heroku addons:create heroku-postgresql
+	heroku addons:create sendgrid
+	heroku addons:create papertrail
+	heroku addons:create newrelic
 	heroku plugins:install git://github.com/ddollar/heroku-config.git
 
 	# Setup database backup
 	estarn "Setup daily database backup"
-	heroku pg:backups schedule DATABASE_URL
+	heroku pg:backups schedule DATABASE_URL --at '02:00 America/Los_Angeles'
 
 	# Setup heroku server env
 	estarn "Configuring heroku environment"
@@ -128,8 +129,9 @@
 	git push heroku master
 
 	# Initalize heroku database
-	estarn "Initializing heroku database and superuser"
+	estarn "Initializing database on heroku"
 	heroku run python server/manage.py migrate
+	estarn "Creating superuser on heroku"
 	heroku run python server/manage.py createsuperuser </dev/tty
 
 	printf "\n\xE2\x98\x85 Done!\nVisit your app at %s\n" ${URL}
