@@ -33,17 +33,17 @@
 	# Greet
 	estar "Hello ${USER}"
 	estar "I guide you trough the setup process"
-
-	# Download base project
-	estarn "Downloading project"
-	curl --progress-bar -0 https://codeload.github.com/djng/djng/tar.gz/master | tar -zx --strip-components=1
-
+	
 	# Check prerequsites
 	estarn "Checking prerequisites"
 	for i in bower git grunt heroku node npm pip virtualenv
 	do
 	   checkcmd "$i"
 	done
+
+	# Download base project
+	estarn "Downloading project"
+	curl --progress-bar -0 https://codeload.github.com/djng/djng/tar.gz/master | tar -zx --strip-components=1
 
 	if [ ! -f server/.env ]; then
 		# Read user information
